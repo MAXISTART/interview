@@ -1,7 +1,8 @@
 import pygame
+from collections import deque
 import random
 import numpy as np
-from scipy.ndimage import label  # 用于连通区域分析
+from scipy.ndimage import label, binary_erosion
 
 # 初始化pygame
 pygame.init()
@@ -19,6 +20,8 @@ pygame.display.set_caption("Ball Avoidance Game-1024客户运营部技术节")
 # 定义颜色
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+YELLOW = (125, 150, 0)
 GREEN = (0, 255, 0)
 # 小球半径 
 BALL_RADIUS = 20
@@ -59,10 +62,11 @@ class Ball:
         self.position[1] = max(self.radius, min(self.position[1], HEIGHT - self.radius))
 
     def draw(self, surface):
-        pygame.draw.circle(surface, GREEN, (self.position[0], self.position[1]), self.radius)
+        pygame.draw.circle(surface, BLUE, (self.position[0], self.position[1]), self.radius)
     
     def __repr__(self) -> str:
         return f"({self.position[0]}, {self.position[1]})"
+
 
 # 定义障碍物类
 class Obstacle:
@@ -95,15 +99,26 @@ def generate_safe_map(ball, obstacles):
     for t in range(TIME_HORIZON):
         for obs in obstacles:
             future_pos = obs.predict_position(t)  # 预测 t 帧后的矩形位置
-            grid_x = int(future_pos[0] // GRID_SIZE)
-            grid_y = int(future_pos[1] // GRID_SIZE)
-            
-            # 标记所有被矩形覆盖的区域为危险（0）
-            for dx in range(int(obs.square_length // GRID_SIZE) + 1):
-                for dy in range(int(obs.square_length // GRID_SIZE) + 1):
-                    gx, gy = grid_x + dx, grid_y + dy
-                    if 0 <= gx < safe_map.shape[0] and 0 <= gy < safe_map.shape[1]:
-                        safe_map[gx, gy] = 0  # 占据的地方标记为危险
+            left = future_pos[0]
+            right = future_pos[0] + obs.square_length
+            top = future_pos[1]
+            bottom = future_pos[1] + obs.square_length
+
+            for grid_x in range(int(left // GRID_SIZE), int(right // GRID_SIZE) + 1):
+                for grid_y in range(int(top // GRID_SIZE), int(bottom // GRID_SIZE) + 1):
+                    if grid_x < safe_map.shape[0] and grid_y < safe_map.shape[1]:
+                        safe_map[grid_x, grid_y] = 0  # 占据的地方标记为危险
+
+    return safe_map
+
+
+def apply_erosion(safe_map, structure_size=2):
+    """
+    对安全区域进行腐蚀，去除狭长的连通区域
+    """
+    structure = np.ones((structure_size, structure_size))  # 结构元素
+    eroded_map = binary_erosion(safe_map, structure).astype(int)
+    return eroded_map
 
 
 def find_largest_safe_zone(safe_map):
@@ -122,26 +137,36 @@ def find_largest_safe_zone(safe_map):
 
     return center
 
+
+def draw_safe_map(safe_map: np.array, surface):
+    for dx in range(safe_map.shape[0]):
+        for dy in range(safe_map.shape[1]):
+            Color = YELLOW if safe_map[dx, dy] == 0 else GREEN
+            pygame.draw.rect(surface, Color, (dx * GRID_SIZE, dy * GRID_SIZE,
+                                    GRID_SIZE, GRID_SIZE))
+
+
 # 检测碰撞，考虑球的半径
 def is_colliding(ball, obstacle):
     # 计算小木块的边界
-    left = obstacle.x
-    right = obstacle.x + obstacle.square_length
-    top = obstacle.y
-    bottom = obstacle.y + obstacle.square_length
+    left = obstacle.position[0]
+    right = obstacle.position[0] + obstacle.square_length
+    top = obstacle.position[1]
+    bottom = obstacle.position[1] + obstacle.square_length
 
     # 计算小球的边界
     ball_radius = ball.radius
-    ball_left = ball.x - ball_radius
-    ball_right = ball.x + ball_radius
-    ball_top = ball.y - ball_radius
-    ball_bottom = ball.y + ball_radius
+    ball_left = ball.position[0] - ball_radius
+    ball_right = ball.position[0] + ball_radius
+    ball_top = ball.position[1] - ball_radius
+    ball_bottom = ball.position[1] + ball_radius
 
     # 检查小球是否与小木块重叠
     return (ball_right >= left and 
             ball_left <= right and 
             ball_bottom >= top and 
             ball_top <= bottom)
+
 
 # 游戏循环渲染，一个线程重绘小球和障碍物
 def main():
@@ -168,10 +193,14 @@ def main():
 
         # 计算安全地图
         safe_map = generate_safe_map(ball, obstacles)
+        # 应用腐蚀算法，去除狭长区域
+        eroded_safe_map = apply_erosion(safe_map, structure_size=2)
+
+        draw_safe_map(eroded_safe_map, window)
 
         # 找到最大安全区域的目标点
-        safe_target = find_largest_safe_zone(safe_map)
-        print(f"最大安全区域的中心点: {safe_target}")
+        safe_target = find_largest_safe_zone(eroded_safe_map)
+        print(f"球可达的最佳安全区域目标点: {safe_target}")
 
         ball.move_towards(safe_target)
 
