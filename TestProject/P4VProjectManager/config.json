@@ -1,0 +1,27 @@
+{
+    "max_parallel_builds": 5,
+    "build_timeout": 14400,
+    "default_check_interval": 3600,
+    "test_mode": false,
+    "log_level": "INFO",
+    "projects": {
+        "Aracade 26": {
+            "depot_path": "//depot/MobileStreetball/Arcade/NBA2K26/Dev/VCSports/",
+            "scripts_path": "S:\\ShortCuts\\nba2k26",
+            "build_scripts": [
+                "build_pc.bat",
+                "build_ios.bat",
+                "build_mac.bat"
+            ],
+            "check_interval": 3600
+        },
+        "Gen4": {
+            "depot_path": "//depot/MobileStreetball/Original/Gen4/Dev/VCSports/",
+            "scripts_path": "S:\\ShortCuts\\origin_gen4",
+            "build_scripts": [
+                "build_pc.bat"
+            ],
+            "check_interval": 3600
+        }
+    }
+}

@@ -1,0 +1,15 @@
+        # test_config = r"O:\Person\Projects\interview\TestProject\P4VProjectManager\TestFiles\config.json"
+        # manager = P4VProjectManager(test_config)
+        config = r"O:\Person\Projects\interview\TestProject\P4VProjectManager\config.json"
+        manager = P4VProjectManager(config)
+
+
+        "Dev": {
+            "depot_path": "//depot/MobileStreetball/Dev/VCSports/",
+            "scripts_path": "S:\\ShortCuts\\dev",
+            "build_scripts": [
+                "build_pc.bat",
+                "build_ios.bat"
+            ],
+            "check_interval": 3600
+        },
