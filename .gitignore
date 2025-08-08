@@ -1,0 +1,15 @@
+# 忽略 .idea 下大多数文件
+.idea/*
+
+# 模块文件
+*.iml
+*.ipr
+*.iws
+
+# 日志
+*.log
+logs/
+log/
+
+# 可执行文件（Windows）
+*.exe

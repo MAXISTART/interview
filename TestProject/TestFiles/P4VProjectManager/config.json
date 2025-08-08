@@ -12,7 +12,7 @@
     "projects": {
         "ProjectA": {
             "path": "//depot/ProjectA/...",
-            "local_path": "H:\\workArea\\PythonProjects\\TestProject\\TestFiles\\P4VProjectManager\\Project_1",
+            "local_path": "TestFiles/P4VProjectManager/Project_1",
             "build_scripts": [
                 "prebuild.bat",
                 "build.bat",
@@ -24,7 +24,7 @@
         },
         "ProjectB": {
             "path": "//depot/ProjectB/...",
-            "local_path": "H:\\workArea\\PythonProjects\\TestProject\\TestFiles\\P4VProjectManager\\Project_2",
+            "local_path": "TestFiles/P4VProjectManager/Project_2",
             "build_scripts": [
                 "prebuild.bat",
                 "build.bat",
