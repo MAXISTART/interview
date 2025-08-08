@@ -7,6 +7,7 @@
     "projects": {
         "Aracade 26": {
             "depot_path": "//depot/MobileStreetball/Arcade/NBA2K26/Dev/VCSports/",
+            "local_path": "s:\\depot\\nba2k26\\VCSports\\",
             "scripts_path": "S:\\ShortCuts\\nba2k26",
             "build_scripts": [
                 "build_pc.bat",
@@ -15,8 +16,19 @@
             ],
             "check_interval": 3600
         },
+        "Dev": {
+            "depot_path": "//depot/MobileStreetball/Dev/VCSports/",
+            "local_path": "s:\\depot\\dev\\VCSports\\",
+            "scripts_path": "S:\\ShortCuts\\dev",
+            "build_scripts": [
+                "build_pc.bat",
+                "build_ios.bat"
+            ],
+            "check_interval": 3600
+        },
         "Gen4": {
             "depot_path": "//depot/MobileStreetball/Original/Gen4/Dev/VCSports/",
+            "local_path": "s:\\depot\\origin_gen4\\VCSports\\",
             "scripts_path": "S:\\ShortCuts\\origin_gen4",
             "build_scripts": [
                 "build_pc.bat"
