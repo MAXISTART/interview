@@ -10,5 +10,14 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-
-*/build
+CMakeFiles/
+.vs/
+*.vcxproj.user
+build/
+out/
+bin/
+obj/
+Debug/
+Release/
+x64/
+ipch/
