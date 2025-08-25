@@ -25,7 +25,7 @@ void Rasterizer::DrawLine2D(const Eigen::Vector2f& Start, const Eigen::Vector2f&
 void Rasterizer::DrawTriangle2D(const Eigen::Vector2f& P0, const Eigen::Vector2f& P1, const Eigen::Vector2f& P2,
 	const Eigen::Vector3f& Color)
 {
-	DrawTriangle2D_Scan(P0, P1, P2, Color);
+	DrawTriangle2D_EdgeOpt(P0, P1, P2, Color);
 }
 
 void Rasterizer::SetPixel( const Eigen::Vector3f& Point, const Eigen::Vector3f& Color )

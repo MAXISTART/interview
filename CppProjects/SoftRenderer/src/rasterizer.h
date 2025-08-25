@@ -28,6 +28,7 @@ protected:
 	// draw triangles
 	void DrawTriangle2D_Scan(const Eigen::Vector2f& P0, const Eigen::Vector2f& P1, const Eigen::Vector2f& P2, const Eigen::Vector3f& Color);
 	void DrawTriangle2D_Edge(const Eigen::Vector2f& P0, const Eigen::Vector2f& P1, const Eigen::Vector2f& P2, const Eigen::Vector3f& Color);
+	void DrawTriangle2D_EdgeOpt(const Eigen::Vector2f& P0, const Eigen::Vector2f& P1, const Eigen::Vector2f& P2, const Eigen::Vector3f& Color);
 
 private:
 
