@@ -1,15 +1,23 @@
-# 忽略 .idea 下大多数文件
-.idea/*
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
 
-# 模块文件
-*.iml
-*.ipr
-*.iws
-
-# 日志
-*.log
-logs/
-log/
-
-# 可执行文件（Windows）
-*.exe
+CMakeFiles/
+.vs/
+*.vcxproj.user
+build/
+out/
+bin/
+obj/
+Debug/
+Release/
+x64/
+ipch/
