@@ -13,6 +13,9 @@ _deps
 CMakeFiles/
 .vs/
 *.vcxproj.user
+*.exe
+*.log
+.idea/
 build/
 out/
 bin/
