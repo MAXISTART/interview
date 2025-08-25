@@ -1,0 +1,29 @@
+{
+    "max_parallel_builds": 3,
+    "build_timeout": 10800,
+    "default_check_interval": 300,
+    "test_mode": true,
+    "log_level": "INFO",
+    "projects": {
+        "ProjectA": {
+            "depot_path": "//depot/main/projectA/...",
+            "scripts_path": "O:\\Person\\Projects\\interview\\TestProject\\P4VProjectManager\\TestFiles\\Project_1",
+            "build_scripts": [
+                "prebuild.bat",
+                "build.bat",
+                "postbuild.bat"
+            ],
+            "check_interval": 10
+        },
+        "ProjectB": {
+            "depot_path": "//depot/main/projectB/...",
+            "scripts_path": "O:\\Person\\Projects\\interview\\TestProject\\P4VProjectManager\\TestFiles\\Project_2",
+            "build_scripts": [
+                "prebuild.bat",
+                "build.bat",
+                "postbuild.bat"
+            ],
+            "check_interval": 10
+        }
+    }
+}
