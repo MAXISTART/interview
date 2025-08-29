@@ -99,6 +99,13 @@ if $P$ is $(\;x, \;y, \;f\;)$
 
 then $P'$ = $(\;\dfrac{nx}{z}, \;\dfrac{ny}{z}, \;1\;)$
 
+if $P$ is $(\;x, \;y, \;z\;)$
+
+then $P'$ = $(\;\dfrac{nx}{z}, \;\dfrac{ny}{z}, \;[0, 1]\;)$
+
+
+
+
 我们想用一个 **常量** 矩阵（齐次矩阵）来乘上 $P$ 得到 $P'$，那么应该如何想呢？上面的表达式可以再写的更具体一点
 
 
@@ -114,9 +121,9 @@ y \\
 n \\
 1
 \end{bmatrix}=\begin{bmatrix}
-\dfrac{nx}{z} \\
+\dfrac{nx}{n} \\
 \\
-\dfrac{ny}{z} \\
+\dfrac{ny}{n} \\
 \\
 0 \\
 \\
@@ -137,9 +144,9 @@ y \\
 f \\
 1
 \end{bmatrix}=\begin{bmatrix}
-\dfrac{nx}{z} \\
+\dfrac{nx}{f} \\
 \\
-\dfrac{ny}{z} \\
+\dfrac{ny}{f} \\
 \\
 1 \\
 \\
@@ -147,6 +154,44 @@ f \\
 \end{bmatrix}
 \;\;\;\;(2)
 $
+
+$\begin{bmatrix}
+\,-\, & \,e_1\, & \,-\, & \,-\,\\
+\,-\ & e_2 & -& \,-\,\\
+\,-\, & \,e_3\ & \,-\,& \,-\,\\
+\,-\, & \,e_4\ & \,-\,& \,-\,\\
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+f \\
+1
+\end{bmatrix}=\begin{bmatrix}
+\dfrac{nx}{z} \\
+\\
+\dfrac{ny}{z} \\
+\\
+-\\
+\\
+-\\
+\end{bmatrix}
+\;\;\;\;(3)
+$
+
+
+由 $(3)$ 的矩阵可以得到一个东西，
+$\begin{bmatrix}
+\,-\, & \,e_1\ & \,-\,& \,-\,\\
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+-\\
+1
+\end{bmatrix}=\dfrac{nx}{z}
+$
+，而这是不可能的，因为我们限定了这个矩阵是常量，里面的每行向量都是常数，所以我们要
+
 
 留意到我特意给变换后的向量的齐次坐标的最后一个分量给了个 $-$ 这样的符号，并不是不知道他是多少，而是不管他是多少先。
 
