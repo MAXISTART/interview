@@ -326,6 +326,7 @@ $\begin{bmatrix}
 \,\dfrac{n}{x_{max}}\, & \,0\, & \,0\, & \,0\,\\
 \,0\ & \dfrac{n}{y_{max}} & 0& \,0\,\\
 \,0\, & \,0\ & \,\dfrac{f}{f - n}\,& \,\dfrac{nf}{n - f}\,\\
+\\
 \,0\, & \,0\ & \,1\,& \,0\,\\
 \end{bmatrix}
 $
@@ -345,4 +346,32 @@ $z' = (\dfrac{zf}{f - n} + \dfrac{nf}{n - f}) / z = \dfrac{f - \dfrac{nf}{z}}{f 
 
 https://observablehq.com/@musixnotmusic/perspective-projection-one
 
+https://www.zhihu.com/question/47219652
+
 可以对比知道哪些不同
+
+<br>
+<br>
+
+# VIEW PORT 
+
+最后是视窗变换，我们前面经过 MVP 后，得到的是一个 $[-1, 1]\times[-1, 1]\times[0, 1]$ 的 NDC，我们需要把 NDC 转成 VIEW PORT，他的空间是 $[0, W]\times[H, 0]\times[0, 1]$，也就只是缩放平移 $x, y$ 方向的值，而没有修改 $z$ 相关的操作，不过 VIEW PORT 中的坐标系方向是有点不一样的， 他是正常的图像坐标系，原点在左上角，所以，对于 $x$ 方向，目标是，$-1$ 映射到 $0$，$1$ 映射到 $W$, 而 $y$ 方向，目标有点不同，我们想要的是 $-1$ 映射到 $H$，而 $1$ 映射到 $0$。
+
+那么应该如何左上述的变换？由于我们的矩阵设计中，$ [s, t] $，$s$ 表示 缩放，$t$ 表示平移，他的变换顺序必须是，缩放后再平移，所以这里我们按照这个顺序来变换上面的点
+
+先看 $x$ 的初始范围 $[-1, 1]$，缩放 $\dfrac{W}{2}$ 倍，得到 $[-\dfrac{W}{2}, \dfrac{W}{2}]$，然后往右平移 $\dfrac{W}{2}$，得到 $[0, W]$。
+
+然后，$y$ 的初始范围是 $[-1, 1]$，缩放 $-\dfrac{H}{2}$ 倍，得到 $[\dfrac{H}{2}, -\dfrac{H}{2}]$，然后往上平移 $\dfrac{W}{2}$，得到 $[H, 0]$。
+
+因此 VIEWPORT MATRIX 就是
+
+$\begin{bmatrix}
+\,\dfrac{W}{2}\, & \,0\, & \,0\, & \,\dfrac{W}{2}\,\\
+\\
+\,0\ & -\dfrac{H}{2} & 0& \,\dfrac{H}{2}\,\\
+\\
+\,0\, & \,0\ & \,1\,& \,0\,\\
+\\
+\,0\, & \,0\ & \,0\,& \,1\,\\
+\end{bmatrix}
+$
