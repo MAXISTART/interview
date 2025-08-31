@@ -21,7 +21,6 @@ int main(int argc, char** argv) {
 	// Rst.DrawTriangle2D(Eigen::Vector2f(200, 200), Eigen::Vector2f(800, 300), Eigen::Vector2f(400, 700), Eigen::Vector3f(1.0, 1.0, 0.0));
 	Rst.DrawTriangle2D(Eigen::Vector2f(400, 700), Eigen::Vector2f(800, 300), Eigen::Vector2f(200, 200), Eigen::Vector3f(1.0, 1.0, 0.0));
 
-
 	while( Key != 27 )
 	{
 		// Render
