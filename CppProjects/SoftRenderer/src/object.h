@@ -9,6 +9,8 @@ public:
 	std::vector<Eigen::Vector4f>& GetVertexes() const;
 	Eigen::Matrix4f GetWorldMatrix() const;
 
+	void UpdateRenderData();	// Create draw call, material, texture, vertexes, etc.
+
 private:
 
 	std::vector<Eigen::Vector4f> mVertexes;
