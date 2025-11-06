@@ -7,9 +7,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # 设置变量
 set(PROJ_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
-set(OpenCV_DIR "H:/workArea/CompileProjects/opencv/install")
-set(OpenCV_BIN_DIR "H:/workArea/CompileProjects/opencv/install/x64/vc17/bin")
-set(EIGEN3_INCLUDE_DIR "H:/workArea/CompileProjects/eigen-3.4.0")
+set(OpenCV_DIR "O:/Person/Projects/CompiledProjects/opencv-4.10.0/install")
+set(OpenCV_BIN_DIR "O:/Person/Projects/CompiledProjects/opencv-4.10.0/install/x64/vc17/bin")
+set(EIGEN3_INCLUDE_DIR "O:/Person/Projects/CompiledProjects/eigen-3.4.0")
 
 # 打印 opencv info
 find_package(OpenCV REQUIRED)

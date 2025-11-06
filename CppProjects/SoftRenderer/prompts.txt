@@ -1,1 +1,11 @@
+编译 opencv
+1. 先创建 build 文件夹，进入 build 文件夹 执行配置
+cmake -G "Visual Studio 17 2022" -A x64 -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX="O:/Person/Projects/CompiledProjects/opencv-4.10.0/install" -D BUILD_EXAMPLES=ON -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D WITH_TBB=ON -D WITH_IPP=ON -D WITH_OPENCL=ON ..
+2. 在 build 文件夹中执行编译和安装
+cmake --build . --config Release -j
+cmake --install . --config Release
+cmake --build . --config Debug -j
+cmake --install . --config Debug
+
+配置项目
 cmake -S . -B build -G "Visual Studio 17 2022" -A x64
